@@ -18,7 +18,7 @@ const stepsData = [
 export default function Home() {
   const [currentStep, setCurrentStep] = useState(1);
 
-  const handleNPrevStep = () => {
+  const handlePrevStep = () => {
     if (currentStep > 1) {
       setCurrentStep(currentStep - 1);
     }
@@ -49,15 +49,15 @@ export default function Home() {
         <ContentWrapper>
           {currentStep === 1 && <StepOne onNextStep={handleNextStep} />}
           {currentStep === 2 && (
-            <StepTwo onPrevStep={handleNPrevStep} onNextStep={handleNextStep} />
+            <StepTwo onPrevStep={handlePrevStep} onNextStep={handleNextStep} />
           )}
           {currentStep === 3 && (
             <StepThree
-              onPrevStep={handleNPrevStep}
+              onPrevStep={handlePrevStep}
               onNextStep={handleNextStep}
             />
           )}
-          {currentStep === 4 && <StepFour onPrevStep={handleNPrevStep} />}
+          {currentStep === 4 && <StepFour onPrevStep={handlePrevStep} />}
         </ContentWrapper>
       </FormWrapper>
     </DisplayWrapper>
