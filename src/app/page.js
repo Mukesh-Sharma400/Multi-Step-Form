@@ -73,13 +73,15 @@ const DisplayWrapper = styled.div`
 const FormWrapper = styled.div`
   background: #fff;
   padding: 10px;
-  border-radius: 10px;
+  border-radius: 15px;
   display: flex;
-  gap: 10px;
+
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  width: 700px;
+  height: 400px;
 `;
 
 const StepperWrapper = styled.div`
@@ -87,7 +89,8 @@ const StepperWrapper = styled.div`
   background-size: cover;
   background-position: center;
   border-radius: 10px;
-  padding: 10px;
+  width: 130px;
+  padding: 30px 40px 30px 30px;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -131,4 +134,6 @@ const StepName = styled.p`
 
 const ContentWrapper = styled.div`
   background: #fff;
+  width: 55%;
+  margin: 0 auto;
 `;

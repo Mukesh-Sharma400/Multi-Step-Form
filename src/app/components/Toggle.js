@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 const ToggleSwitch = styled.div`
@@ -50,10 +50,15 @@ const DarkToggleLabel = styled(ToggleLabel)`
   }
 `;
 
-function Toggle() {
+function Toggle({ isChecked, onToggleChange }) {
   return (
     <ToggleSwitch>
-      <ToggleInput id="toggle" type="checkbox" />
+      <ToggleInput
+        id="toggle"
+        type="checkbox"
+        checked={isChecked}
+        onChange={onToggleChange}
+      />
       <DarkToggleLabel htmlFor="toggle" />
     </ToggleSwitch>
   );

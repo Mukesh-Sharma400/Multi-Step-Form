@@ -13,13 +13,19 @@ export default function StepTwo({ onPrevStep, onNextStep }) {
   const handleOptionChange = (event, nextView) => {
     setView(nextView);
   };
+  const [isYearlySelected, setIsYearlySelected] = useState(false);
+  const handleToggleChange = () => {
+    setIsYearlySelected(!isYearlySelected);
+  };
 
   return (
-    <>
-      <Header>Select your plan</Header>
-      <Description>
-        You have the option of monthly or yearly billing.
-      </Description>
+    <DisplayWrapper>
+      <Header>
+        <Title>Select your plan</Title>
+        <Description>
+          You have the option of monthly or yearly billing.
+        </Description>
+      </Header>
       <SelectPlan
         orientation="vertical"
         value={view}
@@ -49,24 +55,43 @@ export default function StepTwo({ onPrevStep, onNextStep }) {
         </Option>
       </SelectPlan>
       <SelectTime>
-        <Time>Monthly</Time>
-        <Toggle />
-        <Time>Yearly</Time>
+        <MonthlyTime isSelected={!isYearlySelected}>Monthly</MonthlyTime>
+        <Toggle onToggleChange={handleToggleChange} />
+        <YearlyTime isSelected={isYearlySelected}>Yearly</YearlyTime>
       </SelectTime>
       <BottomWrapper>
         <BackBtn onClick={onPrevStep}>Go Back</BackBtn>
         <NextBtn onClick={onNextStep}>Next Step</NextBtn>
       </BottomWrapper>
-    </>
+    </DisplayWrapper>
   );
 }
 
-const Header = styled.p`
+const DisplayWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  justify-content: space-between;
+`;
+
+const Header = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;
+
+const Title = styled.p`
   margin: 0;
+  font-size: 26px;
+  font-weight: bold;
+  color: #03295a;
 `;
 
 const Description = styled.p`
   margin: 0;
+  font-size: 13px;
+  color: gray;
 `;
 
 const SelectPlan = styled(ToggleButtonGroup)`
@@ -79,12 +104,13 @@ const SelectPlan = styled(ToggleButtonGroup)`
 const Option = styled(ToggleButton)`
   justify-content: flex-start !important;
   gap: 10px;
-  border-radius: 10px !important;
+  border: 1px solid #c6c8cb !important;
+  border-radius: 5px !important;
 `;
 
 const Icon = styled.img`
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
 `;
 
 const Details = styled.div``;
@@ -93,12 +119,17 @@ const Name = styled.p`
   margin: 0;
   text-align: start;
   text-transform: none;
+  line-height: normal;
+  font-weight: bold;
+  color: #03295a;
 `;
 
 const Price = styled.p`
   margin: 0;
   text-align: start;
   text-transform: none;
+  line-height: normal;
+  color: gray;
 `;
 
 const SelectTime = styled.div`
@@ -107,8 +138,18 @@ const SelectTime = styled.div`
   gap: 10px;
 `;
 
-const Time = styled.p`
+const MonthlyTime = styled.p`
   margin: 0;
+  color: ${(props) => (props.isSelected ? "#03295a" : "gray")};
+  font-weight: ${(props) => (props.isSelected ? "bold" : "normal")};
+  width: 65px;
+`;
+
+const YearlyTime = styled.p`
+  margin: 0;
+  color: ${(props) => (props.isSelected ? "#03295a" : "gray")};
+  font-weight: ${(props) => (props.isSelected ? "bold" : "normal")};
+  width: 65px;
 `;
 
 const BottomWrapper = styled.div`
@@ -119,6 +160,8 @@ const BottomWrapper = styled.div`
 
 const BackBtn = styled.p`
   margin: 0;
+  cursor: pointer;
+  color: gray;
 `;
 
 const NextBtn = styled.button`
@@ -126,6 +169,9 @@ const NextBtn = styled.button`
   border: none;
   color: #baccdf;
   background: #03295a;
-  border-radius: 10px;
-  padding: 10px;
+  border-radius: 5px;
+  padding: 10px 0;
+  width: 100px;
+  font-size: 14px;
+  cursor: pointer;
 `;
